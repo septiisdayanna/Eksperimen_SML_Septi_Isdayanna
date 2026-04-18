@@ -1,0 +1,54 @@
+name: Data Preprocessing Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ] 
+  workflow_dispatch:
+
+# agar robot GitHub punya izin untuk melakukan 'git push'
+permissions:
+  contents: write
+
+jobs:
+  run-preprocessing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # untuk mengambil seluruh riwayat commit agar bisa melakukan commit baru
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      # 1. Menggunakan INLINE INSTALL 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas scikit-learn joblib numpy
+        
+      # 2. Menjalankan skrip Python 
+      - name: Jalankan Script Preprocessing
+        run: python preprocessing/automate_septi_isdayanna.py
+        
+      # 3. Menggunakan AUTO COMMIT  
+      # Robot akan meng-commit folder hasil ke dalam repositori
+      - name: Commit and push changes
+        if: github.event_name == 'push' # Hanya jalankan jika ini adalah event push, agar tidak terjadi loop
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Tambah seluruh isi folder hasil preprocessing
+          git add preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
+          
+          # Lakukan commit HANYA jika ada perubahan data, agar tidak error
+          git commit -m 'Automated preprocessing result' || echo "Tidak ada perubahan data untuk di-commit"
+          
+          # Push kembali ke GitHub
+          git pull origin main --rebase
+          git push
