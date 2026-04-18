@@ -34,14 +34,14 @@ jobs:
       # 2. Menjalankan skrip Python 
       - name: Jalankan Script Preprocessing
         run: |
-          # 1. JURUS DEBUGGING: Kita suruh robot mengeja isi folder di layarnya!
+          # 1. Debbug
           echo "Isi folder utama:"
           ls -la
           echo "Isi folder preprocessing:"
-          ls -la preprocessing/
+          ls -la Preprocessing/
           
-          # 2. Jalankan skrip (Pastikan nama ini adalah nama yang TERBARU)
-          python preprocessing/automate_septi_isdayanna.py
+          # 2. Jalankan skrip 
+          python Preprocessing/automate_septi_isdayanna.py
         
       # 3. Menggunakan AUTO COMMIT  
       # Robot akan meng-commit folder hasil ke dalam repositori
@@ -52,7 +52,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           # Tambah seluruh isi folder hasil preprocessing
-          git add preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
+          git add Preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
           
           # Lakukan commit HANYA jika ada perubahan data, agar tidak error
           git commit -m 'Automated preprocessing result' || echo "Tidak ada perubahan data untuk di-commit"
