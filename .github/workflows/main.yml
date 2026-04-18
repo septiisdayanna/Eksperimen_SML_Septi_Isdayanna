@@ -52,7 +52,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           # Tambah seluruh isi folder hasil preprocessing
-          git add Preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
+          git add Preprocessing/
           
           # Lakukan commit HANYA jika ada perubahan data, agar tidak error
           git commit -m 'Automated preprocessing result' || echo "Tidak ada perubahan data untuk di-commit"
