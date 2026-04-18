@@ -120,7 +120,7 @@ def preprocess_data_pipeline(
         X, y,
         test_size=test_size,
         random_state=random_state,
-        stratify=stratify_option #memastikan proporsi kelas dalam data latih (Train) dan data uji (Test) sama persis dengan proporsi di dataset aslinya.
+        stratify=stratify_option # memastikan proporsi kelas dalam data latih (Train) dan data uji (Test) sama persis dengan proporsi di dataset aslinya.
     )
 
     # =========================
@@ -209,7 +209,7 @@ def preprocess_data_pipeline(
 # ========================================================
 if __name__ == "__main__":
     # 1. BUAT FOLDER OTOMATIS SEBELUM PROSES DIMULAI
-    output_folder = 'preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing'
+    output_folder = 'Preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing'
     os.makedirs(output_folder, exist_ok=True)
     print(f"Folder output siap di: {output_folder}")
 
