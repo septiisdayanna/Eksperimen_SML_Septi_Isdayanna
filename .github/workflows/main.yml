@@ -33,7 +33,9 @@ jobs:
         
       # 2. Menjalankan skrip Python 
       - name: Jalankan Script Preprocessing
-        run: python preprocessing/automate_septi_isdayanna.py
+        run: |
+          cd Eksperimen_SML_Septi_Isdayanna
+          python preprocessing/automate_septi_isdayanna.py
         
       # 3. Menggunakan AUTO COMMIT  
       # Robot akan meng-commit folder hasil ke dalam repositori
@@ -44,7 +46,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           # Tambah seluruh isi folder hasil preprocessing
-          git add preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
+          git add Eksperimen_SML_Septi_Isdayanna/preprocessing/Sleep_health_and_lifestyle_dataset_preprocessing/
           
           # Lakukan commit HANYA jika ada perubahan data, agar tidak error
           git commit -m 'Automated preprocessing result' || echo "Tidak ada perubahan data untuk di-commit"
