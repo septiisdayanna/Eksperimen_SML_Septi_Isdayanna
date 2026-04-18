@@ -38,9 +38,9 @@ def clean_structural_data(df, target_column):
     if 'Person ID' in df.columns:
         df.drop('Person ID', axis=1, inplace=True)
 
-    # Isi missing target dengan 'None'
+    # Isi missing target dengan 'Normal'
     if df[target_column].isnull().sum() > 0:
-        df[target_column] = df[target_column].fillna('None')
+        df[target_column] = df[target_column].fillna('Normal')
 
     # Normalisasi kategori BMI
     if 'BMI Category' in df.columns:
